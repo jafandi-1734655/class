@@ -41,6 +41,9 @@ function renderItem(item, parent) {
 // Write a function to render search results. 
 // It should iterate through items and call the renderItem method
 function renderSearchResults(results) {
+    // Empty out the #content div
+    $('#content').empty();
+    
     // Create a new ul as the parent + append it to the body
     let ul = $('<ul>');
     $('#content').append(ul);
