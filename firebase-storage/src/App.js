@@ -10,17 +10,16 @@ class App extends Component {
         }
     }
     componentDidMount() {
-        // Create references to the 'imgs' endpoings on database and storage
-        this.dataRef = firebase.database().ref('imgs/')
-        this.storageRef = firebase.storage().ref('imgs/')
+        // Create references to the 'imgs' endpoints on database and storage
+        this.dataRef = firebase.database().ref('imgs/');
+        this.storageRef = firebase.storage().ref('imgs/');
 
         // When the database 'value' changes, change the state of `imgs`
         this.dataRef.on('value', (snapshot) => {
-            console.log('snapshot', snapshot.val())
             this.setState({
                 imgs: snapshot.val() || {}
-            })
-        })
+            });
+        });
     }
 
     // Event when the input changes
@@ -37,22 +36,22 @@ class App extends Component {
         imgRef.put(file).then((snapshot) => {
             this.dataRef.push({
                 url: snapshot.downloadURL
-            })
+            });
         });
 
     }
     render() {
         return (
             <div className="App">
-              <div>
-                <input type="file" onChange={ (e) => this.fileChange(e) } />
-              </div>
-              { /* Iterate through the keys of the `imgs` state and render an image*/ }
-              { Object.keys(this.state.imgs).map((d, i) => {
-                    return <img className="photo" key={ 'img-' + i } src={ this.state.imgs[d].url } />
-                }) }
+                <div>
+                    <input type="file" onChange={(e) => this.fileChange(e)} />
+                </div>
+                { /* Iterate through the keys of the `imgs` state and render an image*/}
+                {Object.keys(this.state.imgs).map((d, i) => {
+                    return <img className="photo" key={'img-' + i} src={this.state.imgs[d].url} />
+                })}
             </div>
-            );
+        );
     }
 }
 
